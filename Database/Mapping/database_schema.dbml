@@ -1,0 +1,247 @@
+// Administrators
+
+// administrator entity
+Table administrators {
+  id integer [PK, NOT NULL]
+  first_name varchar(30) [NOT NULL]
+  second_name varchar(30) [NOT NULL]
+  third_name varchar(30) [NOT NULL]
+  fourth_name varchar(30) [NOT NULL]
+  date_of_birth date [NOT NULL]
+  gender ENUM('M', 'F') [NOT NULL]
+  country varchar(30) [NOT NULL]
+  city varchar(30) [NOT NULL]
+  address varchar(40) [NULL]
+  email varchar(50)
+  image varchar
+  joined_at timestamp
+}
+
+// multivalued_attribute
+Table administrators_phones {
+  // (administrator_id, phone_number) => Composite Primary Key
+  administrator_id integer [PK, ref: > administrators.id]
+  phone_number varchar(20) [PK]
+}
+
+// one-to-one relationship [logins]
+Table administrators_logins {
+  administrator_id integer [PK, ref: > administrators.id]
+  login_id integer [ref: > logins.id]
+}
+
+
+// ========================================================
+// Students
+
+// student entity
+Table students {
+  id integer [PK]
+  first_name varchar(30) [NOT NULL]
+  second_name varchar(30) [NOT NULL]
+  third_name varchar(30) [NOT NULL]
+  fourth_name varchar(30) [NOT NULL]
+  date_of_birth date [NOT NULL]
+  gender ENUM('M', 'F') [NOT NULL]
+  country varchar(30) [NOT NULL]
+  city varchar(30) [NOT NULL]
+  address varchar(40)
+  email varchar(50)
+  image varchar
+  joined_at timestamp [NOT NULL]
+
+  // one-to-many relationship [levels]
+  level_id integer [ref: > levels.id]
+  grade decimal(1,2)
+
+  // one-to-many relationship [departments]
+  department_id integer [ref: > departments.id]
+}
+
+// multivalued_attribute
+Table students_phones {
+  // (student_id, phone_number) => Composite Key
+  student_id integer [PK, ref: > students.id]
+  phone_number varchar(20) [PK]
+}
+
+// one-to-one relationship [logins]
+Table students_logins {
+  student_id integer [PK, ref: > students.id]
+  login_id integer [ref: > logins.id]
+}
+
+// many-to-many relationship [courses]
+Table students_courses {
+  // (student_id, course_id) => Composite Key
+  student_id integer [PK, ref: > students.id]
+  course_id integer [PK, ref: > courses.id]
+}
+
+// many-to-many relationship [exams]
+Table students_exams {
+  // (student_id, exam_id) => Composite Key
+  student_id integer [PK, ref: > students.id]
+  exam_id integer [PK, ref: > exams.id]
+  score integer [NOT NULL]
+}
+
+
+// ========================================================
+// Instructors
+
+// instructor entity
+Table instructors {
+  id integer [PK, NOT NULL]
+  first_name varchar(30) [NOT NULL]
+  second_name varchar(30) [NOT NULL]
+  third_name varchar(30) [NOT NULL]
+  fourth_name varchar(30) [NOT NULL]
+  date_of_birth date [NOT NULL]
+  gender ENUM('M', 'F') [NOT NULL]
+  country varchar(30) [NOT NULL]
+  city varchar(30) [NOT NULL]
+  address varchar(40)
+  email varchar(50)
+  image varchar
+  joined_at timestamp
+  specialized_in varchar(50) [NOT NULL]
+}
+
+// multivalued-attribute
+Table instructors_phones {
+  // (instructor_id, phone_number) => Composite Key
+  instructor_id integer [PK, ref: > instructors.id]
+  phone_number varchar(20) [PK]
+}
+
+// one-to-one relationship [logins]
+Table instructors_logins {
+  instructor_id integer [PK, ref: > instructors.id]
+  login_id integer [ref: > logins.id]
+}
+
+
+// ========================================================
+// Levels
+
+// level entity
+Table levels {
+  id integer [PK, NOT NULL]
+
+  // one-to-many relationship [departments]
+  department_id integer [ref: > departments.id]
+}
+
+
+// ========================================================
+// Departments
+
+// department entity
+Table departments {
+  id integer [PK, NOT NULL]
+  name varchar(30) [NOT NULL]
+}
+
+
+// ========================================================
+// Courses
+
+// course entity
+Table courses {
+  id integer [PK, NOT NULL]
+  code varchar(10) [NOT NULL]
+  title varchar(30) [NOT NULL]
+  description varchar(30000) [NOT NULL]
+  duration integer [NOT NULL]
+
+  // one-to-many relationship [instructors]
+  instructor_id integer [ref: > instructors.id]
+
+  // one-to-many relationship [levels]
+  level_id integer [ref: > levels.id]
+
+}
+
+
+// ========================================================
+// Exams
+
+// exam entity
+Table exams {
+  id integer [PK, NOT NULL]
+  start_at timestamp [NOT NULL]
+  end_at timestamp [NOT NULL]
+  score integer [NOT NULL]
+
+  // one-to-many relationship [courses]
+  course_id integer [ref: > courses.id]
+}
+
+// many-to-many relationship [questions]
+Table exams_quuestions {
+  // (exam_id, question_id) => Composite Key
+  exam_id integer [PK, ref: > exams.id]
+  question_id integer [PK, ref: > questions.id]
+}
+
+// ========================================================
+// Questions
+
+// question entity
+Table questions {
+  id integer [PK, NOT NULL]
+  description varchar(10000) [NOT NULL]
+}
+
+// many-to-many relationship [choices]
+Table questions_choices {
+  // (question_id, choice_id) => Composite Key
+  question_id integer [PK, ref: > questions.id]
+  choice_id integer [PK, ref: > choices.id]
+  is_right bool [NOT NULL]
+}
+
+
+// ========================================================
+// Choices
+
+// choice entity
+Table choices {
+  id integer [PK, NOT NULL]
+  description varchar(10000) [NOT NULL]
+}
+
+
+// ========================================================
+// Containers
+
+// container entity
+Table containers {
+  id integer [PK, NOT NULL]
+  identifier varchar(30) [NOT NULL]
+  ip_address varchar(16) [NOT NULL]
+  ssh_port integer [NOT NULL]
+  status varchar(10) [NOT NULL]
+}
+
+// one-to-one relationship [logins]
+Table containers_logins {
+  container_id integer [PK, ref: > containers.id]
+  login_id integer [ref: > logins.id]
+}
+
+
+// ========================================================
+// Logins
+
+// login entity
+Table logins {
+  id integer [PK, NOT NULL]
+  username varchar(1000) [unique, NOT NULL]
+  password varchar(100) [NOT NULL]
+  last_login timestamp
+  is_active bool [NOT NULL]
+}
+
+
