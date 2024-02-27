@@ -30,6 +30,8 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 # Allowed Hosts
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
+# User Model
+AUTH_USER_MODEL = "accounts.User"
 
 # Default Apps
 DJANGO_APPS = [
