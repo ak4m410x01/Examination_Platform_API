@@ -39,11 +39,11 @@ class UserSerializer(serializers.ModelSerializer):
         view_name = ""
 
         if role == "admin":
-            view_name = "accounts:AdminRetrieveUpdateDestroy"
+            view_name = "api:accounts:AdminRetrieveUpdateDestroy"
         elif role == "instructor":
-            view_name = "accounts:InstructorRetrieveUpdateDestroy"
+            view_name = "api:accounts:InstructorRetrieveUpdateDestroy"
         elif role == "student":
-            view_name = "accounts:StudentRetrieveUpdateDestroy"
+            view_name = "api:accounts:StudentRetrieveUpdateDestroy"
         else:
             return None
 

@@ -6,7 +6,7 @@ from accounts.models.student import Student
 
 class BaseStudentSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(
-        view_name="accounts:StudentRetrieveUpdateDestroy",
+        view_name="api:accounts:StudentRetrieveUpdateDestroy",
         lookup_field="pk",
     )
 

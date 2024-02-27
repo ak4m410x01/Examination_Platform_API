@@ -6,7 +6,7 @@ from accounts.models.instructor import Instructor
 
 class BaseInstructorSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(
-        view_name="accounts:InstructorRetrieveUpdateDestroy",
+        view_name="api:accounts:InstructorRetrieveUpdateDestroy",
         lookup_field="pk",
     )
 

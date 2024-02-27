@@ -6,7 +6,7 @@ from accounts.models.admin import Admin
 
 class BaseAdminSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(
-        view_name="accounts:AdminRetrieveUpdateDestroy",
+        view_name="api:accounts:AdminRetrieveUpdateDestroy",
         lookup_field="pk",
     )
 

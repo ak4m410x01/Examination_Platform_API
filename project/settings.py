@@ -54,6 +54,7 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     "accounts.apps.AccountsConfig",
     "authentication.apps.AuthenticationConfig",
+    "api.apps.ApiConfig",
 ]
 
 # Combine all apps
