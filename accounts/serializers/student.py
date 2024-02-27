@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from re import match
 from datetime import datetime, date
 from rest_framework import serializers
@@ -107,3 +108,17 @@ class StudentSerializer(BaseStudentSerializer):
             for field_name in NOT_REQUIRED_FILEDS:
                 fields[field_name].required = False
         return fields
+
+    def create(self, validated_data):
+        # Hash the password before creating the admin instance
+        password = validated_data.pop("password", None)
+        if password:
+            validated_data["password"] = make_password(password)
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        # Hash the password before updating the admin instance
+        password = validated_data.pop("password", None)
+        if password:
+            validated_data["password"] = make_password(password)
+        return super().update(instance, validated_data)
