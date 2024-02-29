@@ -1,5 +1,5 @@
 from django.db import models
-from exams.models import Exam
+from exams.models.exams import Exam
 
 
 class Question(models.Model):

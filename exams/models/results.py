@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import timedelta
-from exams.models import Exam
-from accounts.models import Student
+from exams.models.exams import Exam
+from accounts.models.student import Student
 
 
 class Result(models.Model):
