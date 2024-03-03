@@ -9,7 +9,7 @@ class Result(models.Model):
 	exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
 	score = models.IntegerField()
 	date_taken = models.DateField()
-	time_taken = models.DurationField(default=timedelta)
+	duration = models.DurationField(default=timedelta)
 
 	def __str__(self):
 		return f'{self.student.name} - {self.exam.title} - {self.score}'
