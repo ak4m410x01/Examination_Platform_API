@@ -11,4 +11,4 @@ class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Level
         ordering = (id,)
-        fields = ['url', 'id', 'level_number', 'courses']
+        fields = ['url', 'level_number', 'courses']
