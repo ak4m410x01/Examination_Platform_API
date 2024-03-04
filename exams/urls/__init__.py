@@ -8,8 +8,8 @@ from exams.urls.choices import urlpatterns as choices_urls
 app_name = "levels"
 
 urlpatterns = [
+    path("", include(exams_urls)),
     path("results/", include(results_urls)),
     path("questions/", include(questions_urls)),
-    path("exams/", include(exams_urls)),
     path("choices/", include(choices_urls)),
 ]

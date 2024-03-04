@@ -9,7 +9,7 @@ from levels.urls.course_student_enrollment import urlpatterns as course_student_
 app_name = "levels"
 
 urlpatterns = [
-    path("levels/", include(level_urls)),
+    path("", include(level_urls)),
     path("departments/", include(department_urls)),
     path("courses/", include(courses_urls)),
     path("enrollments/", include(course_student_enrollment_urls)),
