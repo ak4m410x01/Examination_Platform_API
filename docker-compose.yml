@@ -1,0 +1,69 @@
+version: "3.8"
+services:
+  django:
+    build: .
+    container_name: django-container
+    env_file:
+      - .env
+    entrypoint: /app/django_entrypoints.sh
+    volumes:
+      - static_volume:/app/static
+    restart: unless-stopped
+    ports:
+        - "8000:8000"
+    depends_on:
+      - pgdb
+
+  pgdb:
+      image: postgres:16
+      container_name: pgdb-container
+      hostname: postgres
+      ports:
+        - 5432:5432
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      restart: unless-stopped
+      environment:
+        - POSTGRES_DB= maat_platform
+        - POSTGRES_USER = maat
+        - POSTGRES_PASSWORD= maat
+
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:7.0
+    restart: unless-stopped
+    expose:
+      - 6379
+
+  worker:
+    container_name: worker-container
+    build: .
+    env_file:
+      - .env
+    entrypoint: /app/worker_entrypoints.sh
+    volumes:
+      - static_volume:/app/static
+    depends_on:
+      - pgdb
+      - redis
+      - django
+
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx-container
+    hostname: nginx
+    restart: always
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - static_volume:/app/static
+
+
+ 
+volumes:
+  postgres_data: {}
+  static_volume: {}
