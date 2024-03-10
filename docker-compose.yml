@@ -1,69 +1,40 @@
 version: "3.8"
+
 services:
-  django:
-    build: .
-    container_name: django-container
-    env_file:
-      - .env
-    entrypoint: /app/django_entrypoints.sh
-    volumes:
-      - static_volume:/app/static
+  postgres:
+    container_name: postgres
+    hostname: postgres
+    image: postgres:16
     restart: unless-stopped
     ports:
-        - "8000:8000"
-    depends_on:
-      - pgdb
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
-  pgdb:
-      image: postgres:16
-      container_name: pgdb-container
-      hostname: postgres
-      ports:
-        - 5432:5432
-      volumes:
-        - postgres_data:/var/lib/postgresql/data
-      restart: unless-stopped
-      environment:
-        - POSTGRES_DB= maat_platform
-        - POSTGRES_USER = maat
-        - POSTGRES_PASSWORD= maat
-
-  redis:
-    container_name: redis
-    hostname: redis
-    image: redis:7.0
+  api:
+    container_name: api
+    hostname: api
     restart: unless-stopped
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - static_data:/app/static
     expose:
-      - 6379
-
-  worker:
-    container_name: worker-container
-    build: .
-    env_file:
-      - .env
-    entrypoint: /app/worker_entrypoints.sh
-    volumes:
-      - static_volume:/app/static
-    depends_on:
-      - pgdb
-      - redis
-      - django
-
-  nginx:
-    build: 
-      context: ./nginx
-      dockerfile: Dockerfile
-    container_name: nginx-container
-    hostname: nginx
-    restart: always
-    image: nginx:latest
+      - 80
     ports:
-      - 80:80
-    volumes:
-      - static_volume:/app/static
+      - "80:80"
+    depends_on:
+      - postgres
+    entrypoint:
+      ["python manage.py migrate", "gunicorn project.wsgi --bind 0.0.0.0:80"]
 
-
- 
 volumes:
+  static_data: {}
   postgres_data: {}
-  static_volume: {}
