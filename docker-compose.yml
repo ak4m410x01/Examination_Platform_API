@@ -32,8 +32,7 @@ services:
       - "80:80"
     depends_on:
       - postgres
-    entrypoint:
-      ["python manage.py migrate", "gunicorn project.wsgi --bind 0.0.0.0:80"]
+    command: bash -c "python manage.py migrate && gunicorn project.wsgi --bind 0.0.0.0:80"
 
 volumes:
   static_data: {}
