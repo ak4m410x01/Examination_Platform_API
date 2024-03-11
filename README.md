@@ -34,17 +34,23 @@ The Examination Platform is a robust system for efficient exam management within
    git clone https://github.com/ak4m410x01/Examination_Platform_API.git .
    ```
 
-5. Start the application
+5. Apply Migrations
+
+   ```bash
+    python manage.py makemigrations
+   ```
+
+6. Start the application
 
    ```bash
     docker-compose up -d
    ```
 
-6. Access API: http://127.0.0.1:8000/api/
+7. Access API: http://127.0.0.1/api/
 
-7. Access DB: 127.0.0.1:5432
+8. Access DB: 127.0.0.1:5432
 
-8. Don't forget .env file with variables
+9. Don't forget .env file with variables
 
 | Variable          | Value                                                                 |
 | ----------------- | --------------------------------------------------------------------- |
