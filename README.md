@@ -54,10 +54,10 @@ The Examination Platform is a robust system for efficient exam management within
 | DATABASE_ENGINE   | django.db.backends.postgresql                                         |
 | DATABASE_HOST     | db                                                                    |
 | DATABASE_PORT     | 5432                                                                  |
-| DATABASE_NAME     | gym                                                                   |
-| DATABASE_USER     | gym                                                                   |
-| DATABASE_PASSWORD | gym                                                                   |
-| JWT_SECRET_KEY    | ak4m410x01                                                            |
+| DATABASE_NAME     | maat                                                                  |
+| DATABASE_USER     | maat                                                                  |
+| DATABASE_PASSWORD | maat                                                                  |
+| JWT_SECRET_KEY    | JWT_S3CR3T_K3Y                                                        |
 | POSTGRES_DB       | maat                                                                  |
 | POSTGRES_USER     | maat                                                                  |
 | POSTGRES_PASSWORD | maat                                                                  |
@@ -80,7 +80,7 @@ these variables are for the lab environment only... don't use these in xxx produ
     | Name                          | Version | Use                       |
     | ----------------------------- | ------- | ------------------------- |
     | Python                        | 3.11.7  | Programming Lang          |
-    | Django                        | 5.0.1   | Django Framework          |
+    | Django                        | 5.0.2   | Django Framework          |
     | djangorestframework           | 3.14.0  | Restful Framework         |
     | djangorestframework-simplejwt | 5.3.1   | Restful Framework Jwt     |
     | django-filter                 | 23.5    | Restful Framework filters |
