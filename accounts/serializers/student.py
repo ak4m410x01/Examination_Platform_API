@@ -30,6 +30,8 @@ class BaseStudentSerializer(serializers.ModelSerializer):
             "city",
             "address",
             "phone",
+            "department",
+            "level",
             "is_active",
             "is_staff",
             "is_superuser",
@@ -122,3 +124,10 @@ class StudentSerializer(BaseStudentSerializer):
         if password:
             validated_data["password"] = make_password(password)
         return super().update(instance, validated_data)
+
+    # TODO: Represent Department as a (title) not as a (pk)
+    # def to_representation(self, instance):
+    #     data = super().to_representation(instance)
+    #     # data["department"] = data["department"]
+    #     print(type(data["department"]))
+    #     return data
