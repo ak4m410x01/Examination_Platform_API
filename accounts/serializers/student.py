@@ -3,6 +3,7 @@ from re import match
 from datetime import datetime, date
 from rest_framework import serializers
 from accounts.models.student import Student
+from levels.models import Department, Course
 
 
 class BaseStudentSerializer(serializers.ModelSerializer):
@@ -32,6 +33,7 @@ class BaseStudentSerializer(serializers.ModelSerializer):
             "phone",
             "department",
             "level",
+            "courses",
             "is_active",
             "is_staff",
             "is_superuser",
@@ -93,6 +95,10 @@ class BaseStudentSerializer(serializers.ModelSerializer):
 
 
 class StudentSerializer(BaseStudentSerializer):
+
+    department = serializers.PrimaryKeyRelatedField(queryset=Department.objects.all())
+    courses = serializers.PrimaryKeyRelatedField(queryset=Course.objects.all(), many=True)
+
     def get_fields(self):
         fields = super().get_fields()
         request = self.context.get("request")
@@ -105,7 +111,10 @@ class StudentSerializer(BaseStudentSerializer):
                 "first_name",
                 "second_name",
                 "gender",
+                "courses"
                 "birth_date",
+                "department",
+                "level",
             )
             for field_name in NOT_REQUIRED_FILEDS:
                 fields[field_name].required = False
@@ -125,9 +134,18 @@ class StudentSerializer(BaseStudentSerializer):
             validated_data["password"] = make_password(password)
         return super().update(instance, validated_data)
 
-    # TODO: Represent Department as a (title) not as a (pk)
-    # def to_representation(self, instance):
-    #     data = super().to_representation(instance)
-    #     # data["department"] = data["department"]
-    #     print(type(data["department"]))
-    #     return data
+    def to_representation(self, instance):
+        representation =  super().to_representation(instance)
+        representation["department"] = {
+            "id": instance.department.id,
+            "title": instance.department.title
+            }
+
+        courses = instance.courses.all()
+        representation["courses"] = []
+        for course in courses:
+            representation["courses"].append({
+                "id": course.id,
+                "title": course.title,
+                })
+        return representation
