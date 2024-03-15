@@ -15,7 +15,7 @@ class ExamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exam
-        fields = ['url', 'id', 'title', 'instructor', 'start_date', 'end_date', 'course']
+        fields = ['url', 'id', 'title', 'instructor', 'start_date', 'end_date', 'course', 'exam_score',]
 
     def get_fields(self):
         fields = super().get_fields()
@@ -27,6 +27,7 @@ class ExamSerializer(serializers.ModelSerializer):
                 "start_date",
                 "end_date",
                 "course",
+                "exam_score"
             )
             for field_name in NOT_REQUIRED_FILEDS:
                 fields[field_name].required = False

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from exams.models import Result, Exam
+from exams.models import Result, Exam, Question
 from accounts.models import Student
 
 class ResultSerializer(serializers.ModelSerializer):
@@ -52,5 +52,6 @@ class ResultSerializer(serializers.ModelSerializer):
         representation["exam"] = {
             "id": instance.exam.id,
             "title": instance.exam.title,
+            "exam_score": instance.exam.exam_score,
         }
         return representation

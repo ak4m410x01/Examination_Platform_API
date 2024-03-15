@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from exams.models import StudentAnswer
 from accounts.models import Student
-from exams.models import Exam, Question, Choice
+from exams.models import Exam, Question, Choice, Result
 
 
 class StudentAnswerSerializer(serializers.ModelSerializer):
@@ -65,3 +65,25 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
             "is_correct": instance.student_choice.is_correct
         }
         return representation
+
+    def save(self, **kwargs):
+        # Call the superclass implementation
+        instance = super().save(**kwargs)
+
+        # Calculate the score
+        # total_questions = Question.objects.filter(exam_id=instance.exam.id).count()
+        # trueQ = StudentAnswer.objects.filter(student=instance.student.id, exam=instance.exam.id, student_choice__is_correct=True).count()
+        # exam_score = instance.exam.exam_score
+        # print(f"instance exam id: {instance.exam.id}, instance student id: {instance.student.id}")
+        # print(f"exam_score: {exam_score}, total_questions: {total_questions}, trueQ: {trueQ}")
+        # score = (exam_score / total_questions) * trueQ
+
+        # # Get or create a Result instance
+        # result, created = Result.objects.get_or_create(student=instance.student, exam=instance.exam, defaults={'score': score})
+
+        # # If the Result instance already existed, update the score
+        # if not created:
+        #     result.score = score
+        #     result.save()
+
+        return instance

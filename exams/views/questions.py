@@ -14,6 +14,8 @@ from accounts.permissions.isOwner import IsOwner
 from exams.models.questions import Question
 from django_filters.rest_framework import DjangoFilterBackend
 from exams.filters.questions import QuestionsFilter
+from authentication.utils.token import JWTToken
+from datetime import datetime
 
 class QuestionListCreate(ListCreateAPIView):
     """
@@ -45,6 +47,25 @@ class QuestionListCreate(ListCreateAPIView):
             self.permission_classes = [IsAuthenticated & IsAdmin]
         return super().get_permissions()
 
+    def check_object_permissions(self, request, obj):
+        """
+        Checks if the user is the owner of the object.
+
+        Args:
+        - request: The request object.
+        - obj: The object to be checked.
+
+        Returns:
+        - None
+        """
+        super().check_object_permissions(request, obj)
+
+        token = request.auth.token.decode()
+        payload = JWTToken.get_payload(token)
+        if payload.get("user_role") == "student":
+            now = datetime.now()
+            if obj.exam.start_time >= now or obj.exam.end_time < now:
+                self.permission_denied(request, 'You cannot perform this action at this time.')
 
 class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     """
@@ -77,3 +98,23 @@ class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         elif self.request.method == "DELETE":
             self.permission_classes = [IsAuthenticated & IsAdmin]
         return super().get_permissions()
+
+    def check_object_permissions(self, request, obj):
+        """
+        Checks if the user is the owner of the object.
+
+        Args:
+        - request: The request object.
+        - obj: The object to be checked.
+
+        Returns:
+        - None
+        """
+        super().check_object_permissions(request, obj)
+
+        token = request.auth.token.decode()
+        payload = JWTToken.get_payload(token)
+        if payload.get("user_role") == "student":
+            now = datetime.now()
+            if obj.exam.start_time >= now or obj.exam.end_time < now:
+                self.permission_denied(request, 'You cannot perform this action at this time.')

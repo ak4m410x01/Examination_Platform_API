@@ -9,6 +9,7 @@ class Exam(models.Model):
 	start_date = models.DateTimeField()
 	end_date = models.DateTimeField()
 	course = models.ForeignKey(Course, related_name='exams', on_delete=models.CASCADE)
+	exam_score = models.PositiveIntegerField()
 
 	def __str__(self):
 		return self.title
