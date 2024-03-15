@@ -35,13 +35,13 @@ class ExamSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation["instructor"] = {
-            "id": instance.instructor,
+            "id": instance.instructor.id,
             "username": instance.instructor.username,
             "first_name": instance.instructor.first_name,
             "second_name": instance.instructor.second_name,
         }
         representation["course"] = {
-            "id": instance.course,
+            "id": instance.course.id,
             "title": instance.course.title,
         }
         return representation

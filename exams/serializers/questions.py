@@ -37,8 +37,11 @@ class QuestionSerializer(serializers.ModelSerializer):
             "title": instance.exam.title
         }
 
-        representation["choices"] = {
-            "id": instance.choices.id,
-            "text": instance.choices.text
-        }
+        choices = instance.choices.all()
+        representation["choices"] = []
+        for choice in choices:
+            representation["choices"].append({
+                "id": choice.id,
+                "text": choice.text
+            })
         return representation
