@@ -1,4 +1,5 @@
 import django_filters
+from accounts.models import Student
 from levels.models import Course
 
 class CourseFilter(django_filters.FilterSet):
@@ -25,7 +26,11 @@ class CourseFilter(django_filters.FilterSet):
 	duration = django_filters.DurationFilter(field_name='duration')
 	level = django_filters.NumberFilter(field_name='level')
 	instructor = django_filters.NumberFilter(field_name='instructor')
-	students = django_filters.ModelMultipleChoiceFilter(field_name='students', to_field_name='id')
+	students = django_filters.ModelMultipleChoiceFilter(
+		field_name='students',
+		to_field_name='id',
+		queryset=Student.objects.all()
+	)
 
 	class Meta:
 		model = Course

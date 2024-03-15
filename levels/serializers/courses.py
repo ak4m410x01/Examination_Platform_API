@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from levels.models import Course
-from accounts.models.instructor import Instructor
-from accounts.models.student import Student
+from accounts.models import Instructor
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -10,18 +9,36 @@ class CourseSerializer(serializers.ModelSerializer):
         lookup_field="pk"
     )
 
+    instructor = serializers.PrimaryKeyRelatedField(queryset=Instructor.objects.all())
+
     class Meta:
         model = Course
         ordering = (id,)
-        fields = ['url', 'id', 'course_code', 'title', 'description', 'duration', 'level', 'instructor', 'students']
+        fields = ['url', 'id', 'course_code', 'title', 'description', 'duration', 'level', 'instructor',]
 
-    def validate_instructor(self, value):
-        if not Instructor.objects.filter(id=value.id).exists():
-            raise serializers.ValidationError("The specified instructor does not exist")
-        return value
+    def get_fields(self):
+        fields = super().get_fields()
+        request = self.context.get("request")
+        if request and request.method == "PUT":
+            NOT_REQUIRED_FILEDS = (
+                "course_code",
+                "title",
+                "description",
+                "duration",
+                "level",
+                "instructor",
+            )
+            for field_name in NOT_REQUIRED_FILEDS:
+                fields[field_name].required = False
+        return fields
 
-    def validate_students(self, value):
-        for student in value:
-            if not Student.objects.filter(id=student.id).exists():
-                raise serializers.ValidationError(f"The student with id {student.id} does not exist")
-        return value
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["instructor"] = {
+            "id": instance.instructor.id,
+            "username": instance.instructor.username,
+            "first_name": instance.instructor.first_name,
+            "second_name": instance.instructor.second_name,
+        }
+
+        return representation

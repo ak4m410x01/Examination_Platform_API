@@ -45,7 +45,7 @@ class CourseStudentEnrollmentRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView)
     """
 
     queryset = CourseStudentEnrollment.objects.all()
-    serializer_class = CourseStudentEnrollment
+    serializer_class = CourseStudentEnrollmentSerializer
 
     def get_permissions(self):
         """
