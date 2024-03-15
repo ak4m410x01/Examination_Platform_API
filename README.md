@@ -34,23 +34,17 @@ The Examination Platform is a robust system for efficient exam management within
    git clone https://github.com/ak4m410x01/Examination_Platform_API.git .
    ```
 
-5. Apply Migrations
-
-   ```bash
-    python manage.py makemigrations
-   ```
-
-6. Start the application
+5. Start the application
 
    ```bash
     docker-compose up -d
    ```
 
-7. Access API: http://127.0.0.1/api/
+6. Access API: http://127.0.0.1/api/
 
-8. Access DB: 127.0.0.1:5432
+7. Access DB: 127.0.0.1:5432
 
-9. Don't forget .env file with variables
+8. Don't forget .env file with variables
 
 | Variable          | Value                                                                 |
 | ----------------- | --------------------------------------------------------------------- |
@@ -58,7 +52,7 @@ The Examination Platform is a robust system for efficient exam management within
 | DEBUG             | False                                                                 |
 | ALLOWED_HOSTS     | 172.0.0.1,\*                                                          |
 | DATABASE_ENGINE   | django.db.backends.postgresql                                         |
-| DATABASE_HOST     | db                                                                    |
+| DATABASE_HOST     | postgres                                                                    |
 | DATABASE_PORT     | 5432                                                                  |
 | DATABASE_NAME     | maat                                                                  |
 | DATABASE_USER     | maat                                                                  |
@@ -75,7 +69,7 @@ these variables are for the lab environment only... don't use these in xxx produ
 
 ## 🛠 Documentation and Endpoints
 
-1. [Postman](https://documenter.getpostman.com/view/27192844/2sA2rFQePh)
+1. [Postman](https://documenter.getpostman.com/view/33374896/2sA2xmUqLG)
 <!-- 2. [Apidog](https://apidog.com/apidoc/shared-24d58e46-fc7f-4dcd-8ea0-2658c437d480) -->
 
 ---
