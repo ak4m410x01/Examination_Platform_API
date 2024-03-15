@@ -1,21 +1,27 @@
 from rest_framework import serializers
 from exams.models import Choice
-from exams.models.questions import Question
+from exams.models import Question
 
 class ChoiceSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name="api:exams:ChoiceRetrieveUpdateDestroy",
-        lookup_field="pk",
-    )
+
+    question = serializers.PrimaryKeyRelatedField(queryset=Question.objects.all())
 
     class Meta:
         model = Choice
         fields = ['id', 'question', 'text', 'is_correct']
 
-    def validate_question(self, value):
-        if not Question.objects.filter(id=value.id).exists():
-            raise serializers.ValidationError("The specified question does not exist")
-        return value
+    def get_fields(self):
+        fields = super().get_fields()
+        request = self.context.get("request")
+        if request and request.method == "PUT":
+            NOT_REQUIRED_FILEDS = (
+                "question",
+                "text",
+                "is_correct",
+            )
+            for field_name in NOT_REQUIRED_FILEDS:
+                fields[field_name].required = False
+        return fields
 
     def validate_text(self, value):
         if len(value) > 200:
@@ -23,3 +29,11 @@ class ChoiceSerializer(serializers.ModelSerializer):
         if not value.strip():
             raise serializers.ValidationError("The text cannot be empty")
         return value
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["question"] = {
+            "id": instance.question.id,
+            "text": instance.question.text
+        }
+        return representation

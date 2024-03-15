@@ -1,9 +1,13 @@
 from rest_framework import serializers
+from accounts.models import Instructor
 from exams.models import Exam
-from accounts.models.instructor import Instructor
-from levels.models.courses import Course
+from levels.models import Course
 
 class ExamSerializer(serializers.ModelSerializer):
+
+    instructor = serializers.PrimaryKeyRelatedField(queryset=Instructor.objects.all())
+    course = serializers.PrimaryKeyRelatedField(queryset=Course.objects.all())
+
     url = serializers.HyperlinkedIdentityField(
         view_name="api:exams:ExamRetrieveUpdateDestroy",
         lookup_field="pk",
@@ -13,12 +17,31 @@ class ExamSerializer(serializers.ModelSerializer):
         model = Exam
         fields = ['url', 'id', 'title', 'instructor', 'start_date', 'end_date', 'course']
 
-    def validate_instructor(self, value):
-        if not Instructor.objects.filter(id=value.id).exists():
-            raise serializers.ValidationError("The specified instructor does not exist")
-        return value
+    def get_fields(self):
+        fields = super().get_fields()
+        request = self.context.get("request")
+        if request and request.method == "PUT":
+            NOT_REQUIRED_FILEDS = (
+                "title",
+                "instructor",
+                "start_date",
+                "end_date",
+                "course",
+            )
+            for field_name in NOT_REQUIRED_FILEDS:
+                fields[field_name].required = False
+        return fields
 
-    def validate_course(self, value):
-        if not Course.objects.filter(id=value.id).exists():
-            raise serializers.ValidationError("The specified course does not exist")
-        return value
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["instructor"] = {
+            "id": instance.instructor,
+            "username": instance.instructor.username,
+            "first_name": instance.instructor.first_name,
+            "second_name": instance.instructor.second_name,
+        }
+        representation["course"] = {
+            "id": instance.course,
+            "title": instance.course.title,
+        }
+        return representation

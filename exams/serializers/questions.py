@@ -1,17 +1,44 @@
 from rest_framework import serializers
-from exams.models import Question
-from exams.models.exams import Exam
+from exams.models import Question, Exam
+
 
 class QuestionSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="api:exams:QuestionRetrieveUpdateDestroy",
         lookup_field="pk",
     )
+
+    choices = serializers.PrimaryKeyRelatedField(queryset=Question.objects.all(), many=True)
+    exam = serializers.PrimaryKeyRelatedField(queryset=Exam.objects.all())
+
     class Meta:
         model = Question
-        fields = ['url', 'id', 'exam', 'text']
+        fields = ['id', 'url', 'exam', 'text', 'choices']
 
-    def validate_exam(self, value):
-        if not Exam.objects.filter(id=value.id).exists():
-            raise serializers.ValidationError("The specified exam does not exist")
-        return value
+    def get_fields(self):
+        fields = super().get_fields()
+        request = self.context.get("request")
+        if request and request.method == "POST":
+            fields.pop("choices", None)
+        if request and request.method == "PUT":
+            NOT_REQUIRED_FILEDS = (
+                "exam",
+                "text",
+                "choices"
+            )
+            for field_name in NOT_REQUIRED_FILEDS:
+                fields[field_name].required = False
+        return fields
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["exam"] = {
+            "id": instance.exam.id,
+            "title": instance.exam.title
+        }
+
+        representation["choices"] = {
+            "id": instance.choices.id,
+            "text": instance.choices.text
+        }
+        return representation

@@ -12,7 +12,8 @@ from exams.serializers.questions import QuestionSerializer
 from accounts.permissions.isAdmin import IsAdmin
 from accounts.permissions.isOwner import IsOwner
 from exams.models.questions import Question
-
+from django_filters.rest_framework import DjangoFilterBackend
+from exams.filters.questions import QuestionsFilter
 
 class QuestionListCreate(ListCreateAPIView):
     """
@@ -28,6 +29,8 @@ class QuestionListCreate(ListCreateAPIView):
 
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = QuestionsFilter
 
     def get_permissions(self):
         """
@@ -57,6 +60,8 @@ class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = QuestionsFilter
 
     def get_permissions(self):
         """
