@@ -70,7 +70,7 @@ these variables are for the lab environment only... don't use these in xxx produ
 ## 🛠 Documentation and Endpoints
 
 1. [Postman](https://documenter.getpostman.com/view/27192844/2sA2xnxA2s)
-2. [Apidog](https://3ew4wjhnzp.apidog.io/)
+2. [Apidog](https://wwulj09fuf.apidog.io)
 
 ---
 
