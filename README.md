@@ -69,8 +69,8 @@ these variables are for the lab environment only... don't use these in xxx produ
 
 ## 🛠 Documentation and Endpoints
 
-1. [Postman](https://documenter.getpostman.com/view/33374896/2sA2xmUqLG)
-<!-- 2. [Apidog](https://apidog.com/apidoc/shared-24d58e46-fc7f-4dcd-8ea0-2658c437d480) -->
+1. [Postman](https://documenter.getpostman.com/view/27192844/2sA2xnxA2s)
+2. [Apidog](https://3ew4wjhnzp.apidog.io/)
 
 ---
 
