@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from exams.models import Result, Exam, Question
+from exams.models import Result, Exam, Question, StudentAnswer
 from accounts.models import Student
 
 class ResultSerializer(serializers.ModelSerializer):
@@ -53,5 +53,7 @@ class ResultSerializer(serializers.ModelSerializer):
             "id": instance.exam.id,
             "title": instance.exam.title,
             "exam_score": instance.exam.exam_score,
+            "exam_questions": Question.objects.filter(exam_id=instance.exam.id).count(),
         }
+        representation["true_answers"] = StudentAnswer.objects.filter(student=instance.student.id, exam=instance.exam.id, student_choice__is_correct=True).count()
         return representation

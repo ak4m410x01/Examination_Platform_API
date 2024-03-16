@@ -71,19 +71,20 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
         instance = super().save(**kwargs)
 
         # Calculate the score
-        # total_questions = Question.objects.filter(exam_id=instance.exam.id).count()
-        # trueQ = StudentAnswer.objects.filter(student=instance.student.id, exam=instance.exam.id, student_choice__is_correct=True).count()
-        # exam_score = instance.exam.exam_score
-        # print(f"instance exam id: {instance.exam.id}, instance student id: {instance.student.id}")
-        # print(f"exam_score: {exam_score}, total_questions: {total_questions}, trueQ: {trueQ}")
-        # score = (exam_score / total_questions) * trueQ
+        score = 0
+        total_questions = Question.objects.filter(exam_id=instance.exam.id).count()
+        trueQ = StudentAnswer.objects.filter(student=instance.student.id, exam=instance.exam.id, student_choice__is_correct=True).count()
+        exam_score = instance.exam.exam_score
 
-        # # Get or create a Result instance
-        # result, created = Result.objects.get_or_create(student=instance.student, exam=instance.exam, defaults={'score': score})
+        if total_questions:
+            score = (exam_score / total_questions) * trueQ
 
-        # # If the Result instance already existed, update the score
-        # if not created:
-        #     result.score = score
-        #     result.save()
+        # Get or create a Result instance
+        result, created = Result.objects.get_or_create(student=instance.student, exam=instance.exam, defaults={'score': score})
+
+        # If the Result instance already existed, update the score
+        if not created:
+            result.score = score
+            result.save()
 
         return instance
