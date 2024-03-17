@@ -111,7 +111,7 @@ class StudentSerializer(BaseStudentSerializer):
                 "first_name",
                 "second_name",
                 "gender",
-                "courses"
+                "courses",
                 "birth_date",
                 "department",
                 "level",
