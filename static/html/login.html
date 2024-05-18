@@ -12,13 +12,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- styling  -->
     <link rel="stylesheet" href="../css/login.css">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- login script -->
+    <script src="../scripts/login.js"></script>
 </head>
 <body>
     <section class="mainPage">
         <div class="form">
             <form method="post">
                 <div class="email">
-                    <input type="email" name="e-mail" id="mail" placeholder="enter your email">
+                    <input type="text" name="username" id="username" placeholder="enter your username">
                 </div>
                 <div class="email">
                     <input type="password" name="password" id="pass" placeholder="enter your password">
@@ -29,11 +33,12 @@
                 </div>
                 <input type="submit" value="LOGIN">
             </form>
-    
+
             <div class="google">
                 <img src="../img/google.png" alt="google">
                 <p>sign in with google</p>
             </div>
+            <div id="flash-message" class="flash-error" style="display: none;"></div>
         </div>
 
         <div class="backToHome">
