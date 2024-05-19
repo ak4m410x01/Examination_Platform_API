@@ -1,0 +1,307 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --mainColor: #2052a2;
+    --secondaryColor: #EEF7FF;
+    --boldFont: "Rubik", sans-serif;
+    --smallFont: "Raleway", sans-serif;
+}
+
+.mainPage {
+    width: 100%;
+    background-color: var(--secondaryColor);
+    display: flex;
+    padding: 20px;
+    gap: 40px;
+}
+
+.mainPage .toolBar {
+    width: 18%;
+    background-color: var(--mainColor);
+    color: #EEF7FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    box-shadow: 2px 2px 3px #b3d6f5;
+    position: fixed;
+}
+
+.mainPage .toolBar .logo {
+    margin: 20px 30px 35px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    color: #b3d6f5;
+    gap: 5px;
+    border-bottom: 5px solid #b3d6f5;
+    border-radius: 20px;
+    width: fit-content;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.mainPage .toolBar .logo h2 {
+    font-family: "Grand Hotel", cursive;
+    font-size: 25px;
+    color: #fff;
+}
+
+.mainPage .toolBar .boardClasses > div {
+    margin-bottom: 100px;
+    cursor: pointer;
+}
+
+.mainPage .toolBar .boardClasses div .title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: var(--boldFont);
+    margin: 20px 0;
+}
+
+.mainPage .toolBar .boardClasses div i {
+    font-size: 25px;
+}
+
+.mainPage .board {
+    margin-left: 23%;
+    width: 77%;
+    padding: 20px;
+    box-shadow: 2px 2px 4px #2052a2;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.mainPage .courses {
+    width: 95%;
+    margin: auto;
+    padding: 20px 20px 20px 40px;
+    box-shadow: 2px 2px 3px #2052a2;
+    background-color: #2052a2;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    color: #fff;
+}
+
+.mainPage .courses h2 {
+    color: var(--secondaryColor);
+    font-size: 25px;
+    font-family: var(--boldFont);
+}
+
+.mainPage .courses .course {
+    width: 90%;
+    font-size: 18px;
+    font-family: var(--smallFont);
+    margin: 10px 20px;
+    border: 1px solid var(--secondaryColor);
+    padding: 5px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.mainPage .courses .course:hover {
+    background-color: #EEF7FF;
+    color: #2052a2;
+}
+
+.mainPage .nonFinishedExams,
+.mainPage .finishedExams {
+    width: 95%;
+    margin: 30px auto;
+    background-color: var(--secondaryColor);
+    padding: 20px 20px 20px 40px;
+    box-shadow: 2px 2px 3px #2052a2;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.mainPage .nonFinishedExams h2,
+.mainPage .finishedExams h2 {
+    color: var(--mainColor);
+    font-size: 25px;
+    font-family: var(--boldFont);
+    margin-bottom: 15px;
+}
+
+.mainPage .nonFinishedExams .exams,
+.mainPage .finishedExams .exams {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.mainPage .nonFinishedExams .exams .exam,
+.mainPage .finishedExams .exams .exam {
+    padding: 15px;
+    background-color: #EEF7FF;
+    box-shadow: 2px 2px 2px var(--mainColor);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border: 1px solid var(--mainColor);
+}
+
+.mainPage .nonFinishedExams .exams .exam .title h3,
+.mainPage .finishedExams .exams .exam .title h3 {
+    font-size: 18px;
+    font-family: var(--boldFont);
+    color: #2052a2;
+}
+
+.mainPage .nonFinishedExams .exams .exam .title p,
+.mainPage .finishedExams .exams .exam .title p {
+    font-size: 18px;
+    font-family: var(--smallFont);
+    color: #2052a2;
+}
+
+.mainPage .nonFinishedExams .exams .exam .title,
+.mainPage .finishedExams .exams .exam .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.mainPage .nonFinishedExams .exams .date p,
+.mainPage .finishedExams .exams .exam .date p {
+    margin: 10px;
+}
+
+.mainPage .nonFinishedExams .exams .exam .score,
+.mainPage .finishedExams .exams .exam .score {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    align-items: center;
+    font-size: 18px;
+    font-family: var(--smallFont);
+    color: #2052a2;
+    font-weight: bold;
+}
+
+.mainPage .nonFinishedExams .exams .exam .date,
+.mainPage .finishedExams .exams .exam .date {
+    font-size: 16px;
+    font-family: var(--smallFont);
+    color: #2052a2;
+}
+
+.mainPage .nonFinishedExams .exams .exam .ins,
+.mainPage .finishedExams .exams .exam .ins {
+    color: #002053;
+    font-family: var(--smallFont);
+    font-weight: bold;
+    border-bottom: 2px solid #002053;
+    width: fit-content;
+}
+
+.mainPage .nonFinishedExams .exams .exam:hover,
+.mainPage .finishedExams .exams .exam:hover {
+    background-color: #2052a2;
+    border: 1px solid #EEF7FF;
+}
+
+.mainPage .nonFinishedExams .exams .exam:hover h3,
+.mainPage .finishedExams .exams .exam:hover h3 {
+    color: #EEF7FF;
+}
+
+.mainPage .nonFinishedExams .exams .exam:hover p,
+.mainPage .finishedExams .exams .exam:hover p {
+    color: #EEF7FF;
+}
+
+.mainPage .nonFinishedExams .exams .exam:hover .ins,
+.mainPage .finishedExams .exams .exam:hover .ins {
+    color: #b3d6f5;
+    border-color: #b3d6f5;
+}
+
+.mainPage .finishedExams {
+    background-color: #2052a2;
+}
+
+.mainPage .finishedExams h2 {
+    color: #EEF7FF;
+}
+
+@media (max-width : 1100px) {
+    .mainPage .nonFinishedExams .exams,
+    .mainPage .finishedExams .exams {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .mainPage .toolBar .boardClasses div {
+        font-size: 12px;
+    }
+}
+
+@media (max-width : 1080px) {
+    .mainPage .toolBar .logo h2 {
+        font-size: 19px;
+    }
+
+    .mainPage .toolBar .logo i {
+        font-size: 19px;
+    }
+}
+
+@media (max-width : 860px) {
+    .mainPage .nonFinishedExams .exams,
+    .mainPage .finishedExams .exams {
+        grid-template-columns: 1fr;
+    }
+
+    .mainPage .toolBar .boardClasses div {
+        font-size: 10px;
+    }
+
+    .mainPage .toolBar .logo h2 {
+        font-size: 16px;
+    }
+
+    .mainPage .toolBar .logo i {
+        font-size: 16px;
+    }
+}
+
+@media (max-width : 730px) {
+    .mainPage .toolBar .boardClasses h3 {
+        display: none;
+    }
+
+    .mainPage .board {
+        margin-left: 20%;
+    }
+
+    .mainPage .board .exam {
+        margin-left: -20px;
+    }
+}
