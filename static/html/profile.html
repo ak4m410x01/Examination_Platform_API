@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <!-- google fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Raleway:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <!-- font awesome link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+    <!-- styling  -->
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+    <section class="mainPage">
+        <div class="toolBar">
+            <div class="logo">
+                <i class="fa-solid fa-m"></i>
+                <h2>AAT EXAM</h2>
+            </div>
+            <div class="boardClasses">
+                <div class="dashboard">
+                    <div class="title">
+                        <i class="fa-solid fa-border-all"></i>
+                        <h3><a href="../index.html">DASHBOARD</a></h3>
+                    </div>
+                </div>
+                <div class="profile">
+                    <div class="title">
+                        <i class="fa-solid fa-address-card"></i>
+                    <h3><a href="profile.html">PROFILE</a></h3>
+                    </div>
+                </div>
+                <div class="admin">
+                    <div class="title">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <h3><a href="./html/adminDashboard.html">ADMIN BOARD</a></h3>
+                    </div>
+                </div>
+                <div class="login">
+                    <div class="title">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    <h3><a href="../html/login.html">LOGIN</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profileData">
+            <div class="top">
+                <h3>Profile</h3>
+                <div class="profile">
+                    <img src="../img/profile.png" alt="profileImg">
+                    <p>user name</p>
+                </div>
+            </div>
+            <div class="data">
+                <div class="mainData">
+                    <img src="../img/profile.png" alt="profileImg">
+                    <h3>User Name</h3>
+                    <p>Level 4</p>
+                    <div class="form">
+                        <div class="user">
+                            <input type="text" id="userName" value="Mohammed Ahmed" readonly>
+                            <label for="userName"><i class="fa-solid fa-user"></i></label>
+                        </div>
+                        <div class="email">
+                            <input type="email" id="userEmail" value="mh@gmail.com" readonly>
+                            <label for="userEmail"><i class="fa-solid fa-envelope"></i></label>
+                        </div>
+                        <div class="city">
+                            <input type="text" id="city" value="Cairo" readonly>
+                            <label for="city"><i class="fa-solid fa-location-dot"></i></label>
+                        </div>
+                        <div class="level">
+                            <select name="level" id="level" disabled>
+                                <option value="first">First</option>
+                                <option value="second">Second</option>
+                                <option value="third">Third</option>
+                                <option value="fourth" selected>Fourth</option>
+                            </select>
+                            <label for="level"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="otherData">
+                    <div class="fullName">
+                            <input type="text" id="name1" placeholder="first name" value="Mohamed" readonly>
+                            <input type="text" id="name2" placeholder="second name" value="Ahmed" readonly>
+                    </div>
+                    <div class="fullName">
+                        <input type="text" id="name3" placeholder="third name" value="Mohamed" readonly>
+                        <input type="text" id="name4" placeholder="fourth name" value="Ahmed" readonly>
+                    </div>
+                    <div class="gender">
+                        <select name="gender" id="gender" disabled>
+                            <option value="male" selected>Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <input type="text" placeholder="enter your birth date" value="10 march 2003" readonly>
+                    </div>
+                    <div class="address">
+                        <input type="text" placeholder="your address" value="sohag" readonly>
+                        <input type="text" placeholder="your phone number" value="01234567890" readonly>
+                    </div>
+                    <div class="depart">
+                        <input type="text" placeholder="enter your department" value="network" readonly>
+                        <input type="text" placeholder="enter your specialization" value="network" readonly>
+                    </div>
+                    <p>Joined at : 5 May 2024</p>
+                    <div class="updateData">
+                        <button id="update">Update</button>
+                        <button id="save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/profile.js"></script>
+</body>
+</html>
