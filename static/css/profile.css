@@ -1,0 +1,399 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --mainColor: #2052a2;
+    --secondaryColor: #EEF7FF;
+    --boldFont: "Rubik", sans-serif;
+    --smallFont: "Raleway", sans-serif;
+}
+
+.mainPage {
+    width: 100%;
+    background-color: var(--secondaryColor);
+    display: flex;
+    padding: 20px;
+    gap: 40px;
+}
+
+.mainPage .toolBar {
+    width: 18%;
+    background-color: var(--mainColor);
+    color: #EEF7FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    box-shadow: 2px 2px 3px #b3d6f5;
+    position: fixed;
+}
+
+.mainPage .toolBar .logo {
+    margin: 20px 30px 35px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    color: #b3d6f5;
+    gap: 5px;
+    border-bottom: 5px solid #b3d6f5;
+    border-radius: 20px;
+    width: fit-content;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.mainPage .toolBar a {
+    color: #EEF7FF;
+    text-decoration: none;
+}
+
+.mainPage .toolBar .logo h2 {
+    font-family: "Grand Hotel", cursive;
+    font-size: 25px;
+    color: #fff;
+}
+
+.mainPage .toolBar .boardClasses > div {
+    margin-bottom: 100px;
+    cursor: pointer;
+}
+
+.mainPage .toolBar .boardClasses div .title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: var(--boldFont);
+    margin: 20px 0;
+}
+
+.mainPage .toolBar .boardClasses div i {
+    font-size: 25px;
+}
+
+.mainPage .profileData {
+    width: 75%;
+    box-shadow: 2px 2px 4px var(--mainColor);
+    margin-left: 22%;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    background-image: url("../img/profile2.jpg");
+    background-size: 100% 40vh;
+    background-repeat: no-repeat;
+}
+
+.mainPage .profileData .top {
+    width: 100%;
+    background-color: var(--secondaryColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+}
+
+.mainPage .profileData .top h3 {
+    color: var(--mainColor);
+    font-family: var(--smallFont);
+    font-size: 30px;
+}
+
+.mainPage .profileData .top .profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--mainColor);
+    font-family: var(--smallFont);
+}
+
+.mainPage .profileData .top .profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.mainPage .profileData .data {
+    width: 96%;
+    display: flex;
+    gap: 30px;
+    /* height: 90vh; */
+    margin: 20px;
+    margin-top: 120px;
+
+}
+
+.mainPage .profileData .mainData {
+    width: 30%;
+    padding: 20px;
+    box-shadow: 2px 2px 2px var(--mainColor);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainPage .profileData .otherData {
+    width: 70%;
+    padding: 70px 20px 20px;
+    box-shadow: 2px 2px 2px var(--mainColor);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.mainPage .profileData .data .mainData img {
+    width: 150px;
+    height: 150px;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+    border: 10px solid #012765;
+    border-width: 0 0 10px 0;
+}
+
+.mainPage .profileData .data .mainData h3,
+.mainPage .profileData .data .mainData p {
+    font-family: var(--smallFont);
+    margin-top: 20px;
+}
+
+.mainPage .profileData .data .mainData .form input,
+.mainPage .profileData .data .mainData .form select,
+.mainPage .profileData .data .otherData input,
+.mainPage .profileData .data .otherData select {
+    width: 90%;
+    background-color: #b3d6f5;
+    color: #012765;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px;
+}
+
+.mainPage .profileData .data .mainData .form i {
+    font-size: 18px;
+    color: #012765;
+}
+
+.mainPage .profileData .data .mainData .form .user,
+.mainPage .profileData .data .mainData .form .email,
+.mainPage .profileData .data .mainData .form .city,
+.mainPage .profileData .data .mainData .form .level {
+    display: flex;
+    align-items: center;
+    background-color: #b3d6f5;
+    margin: 5px 10px;
+    padding: 0 5px 0;
+    cursor: pointer;
+}
+
+
+.mainPage .profileData .data .otherData .fullName,
+.mainPage .profileData .data .otherData .gender,
+.mainPage .profileData .data .otherData .address,
+.mainPage .profileData .data .otherData .depart  {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.mainPage .profileData .data .otherData p {
+    font-size: 19px;
+    color: #012765;
+    font-family: var(--smallFont);
+}
+
+.mainPage .profileData .data .otherData .updateData {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.mainPage .profileData .data .otherData .updateData button {
+    width: 25%;
+    padding: 10px 20px;
+    font-family: var(--boldFont);
+    font-size: 20px;
+}
+
+.mainPage .profileData .data .otherData .updateData #update {
+    border: 3px solid #012765;
+    color: #012765;
+    background-color: #b3d6f5;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.mainPage .profileData .data .otherData .updateData #save {
+    border: 3px solid #012765;
+    background-color: #012765;
+    color: #b3d6f5;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+@media (max-width : 1100px) {
+    .mainPage .toolBar {
+        width: 15%;
+    }
+
+    .mainPage .profileData {
+        width: 83%;
+        margin-left: 17%;
+    }
+
+    .mainPage .toolBar .boardClasses div {
+        font-size: 12px;
+    }
+    
+    .mainPage .toolBar .logo i,
+    .mainPage .toolBar .logo h2 {
+        font-size: 15px;
+    }
+}
+
+@media (max-width : 1060px) {
+    .mainPage .profileData .mainData {
+        width: 40%;
+    }
+
+    .mainPage .profileData .otherData {
+        width: 60%;
+    }
+
+    .mainPage .profileData .data .otherData .updateData button {
+        width: 40%;
+    }
+}
+
+@media (max-width : 1000px) {
+    .mainPage .toolBar .logo h2 {
+        font-size: 17px;
+    }
+
+    .mainPage .toolBar .logo i {
+        font-size: 17px;
+    }
+
+    .mainPage .toolBar .boardClasses div {
+        font-size: 10px;
+    }
+}
+
+@media (max-width : 970px) {
+    .mainPage .toolBar {
+        width: 10%;
+    }
+
+    .mainPage .toolBar .logo h2 {
+        font-size: 14px;
+    }
+
+    .mainPage .toolBar .logo i {
+        font-size: 14px;
+    }
+
+    .mainPage .toolBar .boardClasses h3 {
+        display: none;
+    }
+
+    .mainPage .profileData {
+        width: 88%;
+        margin-left: 13%;
+    }
+
+    .mainPage .profileData .otherData {
+        width: 65%;
+    }
+
+    .mainPage .profileData .mainData {
+        width: 35%;
+    }
+
+    .mainPage .profileData .data .mainData img  {
+        width: 100px;
+        height: 100px;
+    }
+
+    .mainPage .profileData .data .otherData .updateData button {
+        width: 48%;
+    }
+}
+
+@media (max-width: 700px) {
+    .mainPage .profileData .data {
+        flex-direction: column;
+    }
+
+    .mainPage .profileData .data .mainData,
+    .mainPage .profileData .data .otherData {
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+    }
+
+    
+    .mainPage .profileData .data .mainData div,
+    .mainPage .profileData .data .otherData div {
+        width: 100%;
+    }
+    
+    .mainPage .profileData .data .mainData input,
+    .mainPage .profileData .data .otherData input,
+    .mainPage .profileData .data .mainData select,
+    .mainPage .profileData .data .otherData select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 460px) {
+    .mainPage .profileData .data .otherData div {
+        flex-direction: column;
+    }
+
+    .mainPage .profileData .data .otherData .updateData button {
+        width: 90%;
+        margin: 5px auto;
+    }
+
+    .mainPage .profileData .top h3 {
+        font-size: 18px;
+    }
+}
