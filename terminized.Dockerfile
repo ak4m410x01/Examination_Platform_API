@@ -12,7 +12,7 @@ SHELL [ "/bin/bash", "-c" ]
 RUN apt update && apt upgrade -y && apt install -y git
 
 # clone the repository
-RUN git clone https://github.com/hackerSa3edy/dockerized_terminal.git .
+RUN git clone https://github.com/hackerSa3edy/dockerized_terminal.git
 
 # set work directory
 WORKDIR /dockerized_terminal
