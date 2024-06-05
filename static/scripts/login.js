@@ -15,8 +15,10 @@ $(document).ready(function () {
         username: username,
         password: password
       }),
-      success: function () {
-        window.location.href = 'http://localhost/dashboard';
+      success: function (token) {
+        document.cookie = `jwtIdentity=${token.access}; path=/`;
+        // window.location.href = 'http://localhost/dashboard';
+        window.location.href = 'http://127.0.0.1:5500/static/';
       },
       error: function () {
         $('#flash-message').text('Incorrect username or password.').show();

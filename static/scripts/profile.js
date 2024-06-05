@@ -24,7 +24,7 @@ $(document).ready(function () {
   });
 
   // Extract JWT token from cookie
-  const token = document.cookie.replace(/(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/, '$1');
+  const token = document.cookie.replace(/(?:(?:^|.*;\s*)jwtIdentity\s*=\s*([^;]*).*$)|^.*$/, '$1');
 
   // Decode JWT token to get USER_ID
   const base64Url = token.split('.')[1];
@@ -72,9 +72,17 @@ $(document).ready(function () {
       $('.mainData h3').text(data.username);
 
       $('#userEmail').val(data.email);
+
       $('#city').val(data.city);
-      $('#level').val(data.level);
-      $('#h-level').text('Level ' + data.level);
+
+      if ('level' in data) {
+        $('#h-level').text('Level ' + data.level);
+        $('#level').val(data.level);
+      } else {
+        $('#level').hide();
+        $('#h-level').hide();
+      }
+
       $('#name1').val(data.first_name);
       $('#name2').val(data.second_name);
       $('#name3').val(data.third_name);
@@ -83,13 +91,24 @@ $(document).ready(function () {
       $('#birth_date').val(data.birth_date);
       $('#address').val(data.address);
       $('#phone_number').val(data.phone);
-      $('#department').val(data.department.title);
-      $('#specialization').val(data.courses[0].title);
+
+      if ('department' in data) {
+        $('#department').val(data.department.title);
+      } else {
+        $('#department').hide();
+      }
+
+      if ('specialization' in data) {
+        $('#specialization').val(data.courses[0].title);
+      } else {
+        $('#specialization').hide();
+      }
+
       $('#joined_at').text('Joined at : ' + new Date(data.date_joined).toLocaleDateString());
     },
     error: function (jqXHR, textStatus, errorThrown) {
       // Insert error message into HTML page
-      $('#flash-message').text(jqXHR.responseText || textStatus);
+      $('#flash-message').text(jqXHR.responseJSON.detail || textStatus);
       $('#flash-message').show();
     }
   });
