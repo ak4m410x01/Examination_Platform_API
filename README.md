@@ -34,25 +34,31 @@ The Examination Platform is a robust system for efficient exam management within
    git clone https://github.com/ak4m410x01/Examination_Platform_API.git .
    ```
 
-5. Start the application
+5. Switch to DeployOnDocker Branch
+
+   ```bash
+   git switch DeployOnDocker
+   ```
+
+6. Start the application
 
    ```bash
     docker-compose up -d
    ```
 
-6. Access API: http://127.0.0.1/api/
+7. Access API: http://127.0.0.1/api/
 
-7. Access DB: 127.0.0.1:5432
+8. Access DB: 127.0.0.1:5432
 
-8. Don't forget .env file with variables
+9. Don't forget .env file with variables
 
 | Variable          | Value                                                                 |
 | ----------------- | --------------------------------------------------------------------- |
 | SECRET_KEY        | 'django-insecure-%2dmqnqj9v2e&8yk\*t=#b+2-=i!45+153*@-g0*=&%1od16z^m' |
 | DEBUG             | False                                                                 |
-| ALLOWED_HOSTS     | 172.0.0.1,\*                                                          |
+| ALLOWED_HOSTS     | 172.0.0.1,*                                                           |
 | DATABASE_ENGINE   | django.db.backends.postgresql                                         |
-| DATABASE_HOST     | postgres                                                                    |
+| DATABASE_HOST     | postgres                                                              |
 | DATABASE_PORT     | 5432                                                                  |
 | DATABASE_NAME     | maat                                                                  |
 | DATABASE_USER     | maat                                                                  |
