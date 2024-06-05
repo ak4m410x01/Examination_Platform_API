@@ -282,7 +282,7 @@
     .mainPage .toolBar .boardClasses div {
         font-size: 12px;
     }
-    
+
     .mainPage .toolBar .logo i,
     .mainPage .toolBar .logo h2 {
         font-size: 15px;
@@ -369,12 +369,12 @@
         padding: 20px;
     }
 
-    
+
     .mainPage .profileData .data .mainData div,
     .mainPage .profileData .data .otherData div {
         width: 100%;
     }
-    
+
     .mainPage .profileData .data .mainData input,
     .mainPage .profileData .data .otherData input,
     .mainPage .profileData .data .mainData select,
@@ -396,4 +396,14 @@
     .mainPage .profileData .top h3 {
         font-size: 18px;
     }
+}
+
+.flash-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-top: 20px;
 }

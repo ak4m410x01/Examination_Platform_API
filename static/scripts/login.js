@@ -8,7 +8,7 @@ $(document).ready(function () {
     const password = $('#pass').val();
 
     $.ajax({
-      url: 'http://localhost:5000/api/auth/token/',
+      url: 'http://localhost/api/auth/token/',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({

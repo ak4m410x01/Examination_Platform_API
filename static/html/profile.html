@@ -63,26 +63,26 @@
                 <div class="mainData">
                     <img src="../img/profile.png" alt="profileImg">
                     <h3>User Name</h3>
-                    <p>Level 4</p>
+                    <p id="h-level">Level 4</p>
                     <div class="form">
                         <div class="user">
-                            <input type="text" id="userName" value="Mohammed Ahmed" readonly>
+                            <input type="text" id="userName" value="" readonly>
                             <label for="userName"><i class="fa-solid fa-user"></i></label>
                         </div>
                         <div class="email">
-                            <input type="email" id="userEmail" value="mh@gmail.com" readonly>
+                            <input type="email" id="userEmail" value="" readonly>
                             <label for="userEmail"><i class="fa-solid fa-envelope"></i></label>
                         </div>
                         <div class="city">
-                            <input type="text" id="city" value="Cairo" readonly>
+                            <input type="text" id="city" value="" readonly>
                             <label for="city"><i class="fa-solid fa-location-dot"></i></label>
                         </div>
                         <div class="level">
                             <select name="level" id="level" disabled>
-                                <option value="first">First</option>
-                                <option value="second">Second</option>
-                                <option value="third">Third</option>
-                                <option value="fourth" selected>Fourth</option>
+                                <option value="1">First</option>
+                                <option value="2">Second</option>
+                                <option value="3">Third</option>
+                                <option value="4">Fourth</option>
                             </select>
                             <label for="level"></label>
                         </div>
@@ -90,33 +90,34 @@
                 </div>
                 <div class="otherData">
                     <div class="fullName">
-                            <input type="text" id="name1" placeholder="first name" value="Mohamed" readonly>
-                            <input type="text" id="name2" placeholder="second name" value="Ahmed" readonly>
+                            <input type="text" id="name1" placeholder="first name" value="" readonly>
+                            <input type="text" id="name2" placeholder="second name" value="" readonly>
                     </div>
                     <div class="fullName">
-                        <input type="text" id="name3" placeholder="third name" value="Mohamed" readonly>
-                        <input type="text" id="name4" placeholder="fourth name" value="Ahmed" readonly>
+                        <input type="text" id="name3" placeholder="third name" value="" readonly>
+                        <input type="text" id="name4" placeholder="fourth name" value="" readonly>
                     </div>
                     <div class="gender">
                         <select name="gender" id="gender" disabled>
-                            <option value="male" selected>Male</option>
-                            <option value="female">Female</option>
+                            <option value="m">Male</option>
+                            <option value="f">Female</option>
                         </select>
-                        <input type="text" placeholder="enter your birth date" value="10 march 2003" readonly>
+                        <input type="text" id="birth_date" placeholder="enter your birth date" value="" readonly>
                     </div>
                     <div class="address">
-                        <input type="text" placeholder="your address" value="sohag" readonly>
-                        <input type="text" placeholder="your phone number" value="01234567890" readonly>
+                        <input type="text" id="address" placeholder="your address" value="" readonly>
+                        <input type="text" id="phone_number" placeholder="your phone number" value="" readonly>
                     </div>
                     <div class="depart">
-                        <input type="text" placeholder="enter your department" value="network" readonly>
-                        <input type="text" placeholder="enter your specialization" value="network" readonly>
+                        <input type="text" id="department" placeholder="enter your department" value="" readonly>
+                        <input type="text" id="specialization" placeholder="enter your specialization" value="" readonly>
                     </div>
-                    <p>Joined at : 5 May 2024</p>
+                    <p id="joined_at">Joined at : </p>
                     <div class="updateData">
                         <button id="update">Update</button>
                         <button id="save">Save</button>
                     </div>
+                    <div id="flash-message" class="flash-error" style="display: none;"></div>
                 </div>
             </div>
         </div>
