@@ -34,22 +34,6 @@ services:
       - postgres
     command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn project.wsgi --bind 0.0.0.0:80 --reload"
 
-  terminized:
-    container_name: terminized
-    hostname: terminized
-    restart: unless-stopped
-    build:
-      context: .
-      dockerfile: terminized.Dockerfile
-    volumes:
-      - template_data:/dockerized_terminal/templates
-    expose:
-      - 5000
-    ports:
-      - "5000:5000"
-    command: bash -c "gunicorn --worker-class eventlet -w 1 app:app --bind 0.0.0.0:5000"
-
 volumes:
   static_data: {}
   postgres_data: {}
-  template_data: {}
