@@ -11,6 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 from exams.serializers.choices import ChoiceSerializer
 from exams.models.choices import Choice
 from accounts.permissions.isAdmin import IsAdmin
+from accounts.permissions.isInstructor import IsInstructor
+from accounts.permissions.isStudent import IsStudent
 from accounts.permissions.isOwner import IsOwner
 
 
@@ -37,9 +39,9 @@ class ChoiceListCreate(ListCreateAPIView):
         - A list of permission classes based on the request method.
         """
         if self.request.method == "GET":
-            self.permission_classes = [IsAuthenticated & IsAdmin]
+            self.permission_classes = [IsAuthenticated & (IsAdmin | IsInstructor | IsStudent)]
         elif self.request.method == "POST":
-            self.permission_classes = [IsAuthenticated & IsAdmin]
+            self.permission_classes = [IsAuthenticated & IsInstructor]
         return super().get_permissions()
 
 
@@ -66,9 +68,9 @@ class ChoiceRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         - A list of permission classes based on the request method.
         """
         if self.request.method == "GET":
-            self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner)]
+            self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner | IsStudent)]
         elif self.request.method == "PUT":
-            self.permission_classes = [IsAuthenticated & IsAdmin]
+            self.permission_classes = [IsAuthenticated & IsOwner]
         elif self.request.method == "DELETE":
-            self.permission_classes = [IsAuthenticated & IsAdmin]
+            self.permission_classes = [IsAuthenticated & IsOwner]
         return super().get_permissions()
