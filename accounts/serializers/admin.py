@@ -80,15 +80,6 @@ class BaseAdminSerializer(serializers.ModelSerializer):
 
         return value
 
-    def validate_phone(self, value: str) -> str:
-        regex = r"^\+201[0125]\d{8}$"
-        if not match(regex, value):
-            raise serializers.ValidationError(
-                "Egyptian phone number must be like: '+201234567890'"
-            )
-
-        return value
-
 
 class AdminSerializer(BaseAdminSerializer):
     def get_fields(self):
