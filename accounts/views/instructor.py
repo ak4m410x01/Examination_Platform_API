@@ -30,7 +30,7 @@ class InstructorRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         if self.request.method == "GET":
             self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner)]
         elif self.request.method == "PUT":
-            self.permission_classes = [IsAuthenticated & IsAdmin]
+            self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner)]
         elif self.request.method == "DELETE":
             self.permission_classes = [IsAuthenticated & IsAdmin]
         return super().get_permissions()
