@@ -9,7 +9,6 @@ Classes:
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
-from django.db.models import Q
 from exams.serializers.exams import ExamSerializer
 from exams.filters.exams import ExamFilter
 from accounts.permissions.isAdmin import IsAdmin
@@ -33,16 +32,7 @@ class ExamListCreate(ListCreateAPIView):
     - get_permissions: Overrides the default method to set the permissions based on the request method.
     """
 
-    def get_queryset(self):
-        user = self.request.user
-        print(user)
-        if user.is_instructor:
-            return Exam.objects.filter(instructor=user)
-        elif user.is_student:
-            return Exam.objects.filter(Q(students__in=[user]))
-        else:
-            return Exam.objects.none()
-
+    queryset = Exam.objects.all()
     serializer_class = ExamSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ExamFilter
