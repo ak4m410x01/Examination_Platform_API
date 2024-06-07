@@ -59,7 +59,7 @@ class ExamListCreate(ListCreateAPIView):
         if self.request.method == "GET":
             self.permission_classes = [IsAuthenticated & (IsAdmin | IsInstructor | IsStudent)]
         elif self.request.method == "POST":
-            self.permission_classes = [IsAuthenticated & IsInstructor]
+            self.permission_classes = [IsAuthenticated & (IsInstructor | IsAdmin)]
         return super().get_permissions()
 
 
@@ -98,7 +98,7 @@ class ExamRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         if self.request.method == "GET":
             self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner | IsStudent)]
         elif self.request.method == "PUT":
-            self.permission_classes = [IsAuthenticated & IsOwner]
+            self.permission_classes = [IsAuthenticated & (IsOwner | IsAdmin)]
         elif self.request.method == "DELETE":
-            self.permission_classes = [IsAuthenticated & IsOwner]
+            self.permission_classes = [IsAuthenticated & (IsOwner | IsAdmin)]
         return super().get_permissions()
