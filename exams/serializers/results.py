@@ -54,6 +54,10 @@ class ResultSerializer(serializers.ModelSerializer):
             "title": instance.exam.title,
             "exam_score": instance.exam.exam_score,
             "exam_questions": Question.objects.filter(exam_id=instance.exam.id).count(),
+            "start_date": instance.exam.start_date,
+            "end_date": instance.exam.end_date,
+            "course_title": instance.exam.course.title
         }
+        representation["instructor"] = instance.exam.instructor
         representation["true_answers"] = StudentAnswer.objects.filter(student=instance.student.id, exam=instance.exam.id, student_choice__is_correct=True).count()
         return representation
