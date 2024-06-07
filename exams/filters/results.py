@@ -12,7 +12,7 @@ class ResultFilter(django_filters.FilterSet):
 		min_score (django_filters.NumberFilter): Filter for minimum score.
 		max_score (django_filters.NumberFilter): Filter for maximum score.
 	"""
-	student_name = django_filters.CharFilter(field_name='student__username', lookup_expr='icontains')
+	student_name = django_filters.CharFilter(field_name='student__username', lookup_expr='exact')
 	exam_title = django_filters.CharFilter(field_name='exam__title', lookup_expr='icontains')
 	instructor_name = django_filters.CharFilter(field_name='exam__instructor__username', lookup_expr='icontains')
 	min_score = django_filters.NumberFilter(field_name='score', lookup_expr='gte')
