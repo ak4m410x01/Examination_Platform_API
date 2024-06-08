@@ -18,6 +18,7 @@ from exams.models.exams import Exam
 from django_filters.rest_framework import DjangoFilterBackend
 from exams.filters.questions import QuestionsFilter
 from datetime import datetime
+import pytz
 
 class QuestionListCreate(ListCreateAPIView):
     """
@@ -43,7 +44,7 @@ class QuestionListCreate(ListCreateAPIView):
         if exam_id and exam_title:
             if user_type == 3:
                 exam = Exam.objects.get(id=exam_id, title=exam_title)
-                if not (exam.start_date <= datetime.now() <= exam.end_date):
+                if not (exam.start_date <= datetime.now(pytz.UTC) <= exam.end_date):
                     self.permission_denied(self.request, 'You can\'t do that action at this time')
             return Question.objects.filter(exam__id=exam_id, exam__title=exam_title)
         elif user_type == 3:
@@ -91,7 +92,7 @@ class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
         if user_type == 3:
             exam = Exam.objects.get(id=exam_id, title=exam_title)
-            if not (exam.start_date <= datetime.now() <= exam.end_date):
+            if not (exam.start_date <= datetime.now(pytz.UTC) <= exam.end_date):
                 self.permission_denied(self.request, 'You can\'t do that action at this time')
 
         return Question.objects.all()
