@@ -31,7 +31,22 @@ class QuestionListCreate(ListCreateAPIView):
     - get_permissions: Returns the list of permissions required for each HTTP method.
     """
 
-    queryset = Question.objects.all()
+    def get_queryset(self):
+        """
+        This view should return a list of all the questions
+        for the currently authenticated user.
+        """
+        exam_id = self.request.query_params.get('exam_id', None)
+        exam_title = self.request.query_params.get('exam_title', None)
+        user_type = self.request.user.user_type
+
+        if exam_id and exam_title:
+            return Question.objects.filter(exam__id=exam_id, exam__title=exam_title)
+        elif user_type == 3:
+            self.permission_denied(self.request, 'You can\'t list all exams questions at once')
+        else:
+            return Question.objects.all()
+
     serializer_class = QuestionSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = QuestionsFilter
@@ -66,7 +81,7 @@ class QuestionListCreate(ListCreateAPIView):
         payload = JWTToken.get_payload(token)
         if payload.get("user_role") == "student":
             now = datetime.now()
-            if obj.exam.start_time >= now or obj.exam.end_time < now:
+            if not (now >= obj.exam.start_time and now < obj.exam.end_time):
                 self.permission_denied(request, 'You cannot perform this action at this time.')
 
 class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
