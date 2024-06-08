@@ -75,17 +75,7 @@ class ExamRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     - get_permissions: Overrides the default method to set the permissions based on the request method.
     """
 
-    def get_queryset(self):
-        # Get all exams
-        queryset = Exam.objects.all()
-
-        # Get exams that have results
-        exams_with_results = Result.objects.values_list('exam', flat=True).distinct()
-
-        # Filter out exams that have results
-        queryset = queryset.exclude(id__in=exams_with_results)
-
-        return queryset
+    queryset = Exam.objects.all()
     serializer_class = ExamSerializer
 
     def get_permissions(self):
