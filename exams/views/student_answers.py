@@ -12,7 +12,12 @@ from exams.filters.student_answers import StudentAnswersFilter
 
 class StudentAnswersListCreate(ListCreateAPIView):
 
-    queryset = StudentAnswer.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        if user.user_type == 3:
+            return StudentAnswer.objects.filter(student=user)
+        return StudentAnswer.objects.all()
+
     serializer_class = StudentAnswerSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = StudentAnswersFilter
@@ -27,13 +32,17 @@ class StudentAnswersListCreate(ListCreateAPIView):
         if self.request.method == "GET":
             self.permission_classes = [IsAuthenticated & (IsAdmin | IsInstructor | IsStudent)]
         elif self.request.method == "POST":
-            self.permission_classes = [IsAuthenticated & IsInstructor]
+            self.permission_classes = [IsAuthenticated & IsStudent]
         return super().get_permissions()
 
 
 class StudentAnswersRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
-    queryset = StudentAnswer.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        if user.user_type == 3:
+            return StudentAnswer.objects.filter(student=user)
+        return StudentAnswer.objects.all()
     serializer_class = StudentAnswerSerializer
 
     def get_permissions(self):
@@ -44,9 +53,9 @@ class StudentAnswersRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         - A list of permission classes.
         """
         if self.request.method == "GET":
-            self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner | IsStudent)]
+            self.permission_classes = [IsAuthenticated & (IsAdmin | IsStudent | IsInstructor)]
         elif self.request.method == "PUT":
-            self.permission_classes = [IsAuthenticated & IsOwner]
+            self.permission_classes = [IsAuthenticated & IsStudent]
         elif self.request.method == "DELETE":
-            self.permission_classes = [IsAuthenticated & IsOwner]
+            self.permission_classes = [IsAuthenticated & IsStudent]
         return super().get_permissions()

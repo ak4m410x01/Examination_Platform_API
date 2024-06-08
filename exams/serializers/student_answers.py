@@ -54,7 +54,7 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
                 {
                     "id": choice.id,
                     "choice": choice.text,
-                    "is_correct": choice.is_correct
+                    **({"is_correct": choice.is_correct} if instance.student.user_type != 3 else {})
                 }
                 for choice in instance.question.choices.all()
             ],
@@ -62,7 +62,7 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
         representation["student_choice"] = {
             "id": instance.student_choice.id,
             "choice": instance.student_choice.text,
-            "is_correct": instance.student_choice.is_correct
+            **({"is_correct": instance.student_choice.is_correct} if instance.student.user_type != 3 else {})
         }
         return representation
 
