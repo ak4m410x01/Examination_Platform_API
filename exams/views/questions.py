@@ -109,9 +109,9 @@ class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         - A list of permission classes.
         """
         if self.request.method == "GET":
-            self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner | IsStudent)]
+            self.permission_classes = [IsAuthenticated & (IsAdmin | IsInstructor| IsStudent)]
         elif self.request.method == "PUT":
-            self.permission_classes = [IsAuthenticated & IsOwner]
+            self.permission_classes = [IsAuthenticated & IsInstructor]
         elif self.request.method == "DELETE":
-            self.permission_classes = [IsAuthenticated & IsOwner]
+            self.permission_classes = [IsAuthenticated & IsInstructor]
         return super().get_permissions()

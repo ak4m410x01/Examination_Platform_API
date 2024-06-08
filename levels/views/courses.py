@@ -58,7 +58,7 @@ class CourseListCreate(ListCreateAPIView):
         if self.request.method == "GET":
             self.permission_classes = [IsAuthenticated & (IsAdmin | IsInstructor | IsStudent)]
         elif self.request.method == "POST":
-            self.permission_classes = [IsAuthenticated & IsInstructor]
+            self.permission_classes = [IsAuthenticated & IsAdmin]
         return super().get_permissions()
 
 
@@ -94,9 +94,9 @@ class CourseRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         - A list of permission classes.
         """
         if self.request.method == "GET":
-            self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner | IsStudent)]
+            self.permission_classes = [IsAuthenticated & (IsAdmin | IsInstructor| IsStudent)]
         elif self.request.method == "PUT":
-            self.permission_classes = [IsAuthenticated & IsOwner]
+            self.permission_classes = [IsAuthenticated & IsAdmin]
         elif self.request.method == "DELETE":
-            self.permission_classes = [IsAuthenticated & IsOwner]
+            self.permission_classes = [IsAuthenticated & IsAdmin]
         return super().get_permissions()
