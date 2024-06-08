@@ -43,7 +43,7 @@ class QuestionListCreate(ListCreateAPIView):
         if exam_id and exam_title:
             return Question.objects.filter(exam__id=exam_id, exam__title=exam_title)
         elif user_type == 3:
-            self.permission_denied(self.request, 'You can\'t list all exams questions at once')
+            self.permission_denied(self.request, 'The parameter exam_id or exam_title or both are missing')
         else:
             return Question.objects.all()
 
