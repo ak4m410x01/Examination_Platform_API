@@ -47,13 +47,13 @@ class ExamSerializer(serializers.ModelSerializer):
             "title": instance.course.title,
         }
         # Convert start_date and end_date to Cairo timezone
-        # start_date_utc = instance.start_date
-        # end_date_utc = instance.end_date
-        # cairo_tz = pytz_timezone('Africa/Cairo')
-        # start_date_tz = start_date_utc.astimezone(cairo_tz)
-        # end_date_tz = end_date_utc.astimezone(cairo_tz)
-        # representation["start_date"] = start_date_tz.isoformat()
-        # representation["end_date"] = end_date_tz.isoformat()
+        start_date_utc = instance.start_date
+        end_date_utc = instance.end_date
+        cairo_tz = pytz_timezone('Africa/Cairo')
+        start_date_tz = start_date_utc.astimezone(cairo_tz)
+        end_date_tz = end_date_utc.astimezone(cairo_tz)
+        representation["start_date"] = start_date_tz.isoformat()
+        representation["end_date"] = end_date_tz.isoformat()
 
         return representation
 
