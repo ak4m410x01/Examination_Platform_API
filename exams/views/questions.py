@@ -14,6 +14,8 @@ from accounts.permissions.isOwner import IsOwner
 from accounts.permissions.isStudent import IsStudent
 from accounts.permissions.isInstructor import IsInstructor
 from exams.models.questions import Question
+from exams.models.exams import Exam
+from datetime import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from exams.filters.questions import QuestionsFilter
 from authentication.utils.token import JWTToken
@@ -41,6 +43,10 @@ class QuestionListCreate(ListCreateAPIView):
         user_type = self.request.user.user_type
 
         if exam_id and exam_title:
+            if user_type == 3:
+                exam = Exam.objects.get(id=exam_id, title=exam_title)
+                if not (exam.start_time <= timezone.now() <= exam.end_time):
+                    self.permission_denied(self.request, 'You can\'t do that action at this time')
             return Question.objects.filter(exam__id=exam_id, exam__title=exam_title)
         elif user_type == 3:
             self.permission_denied(self.request, 'The parameter exam_id or exam_title or both are missing')
@@ -64,26 +70,6 @@ class QuestionListCreate(ListCreateAPIView):
             self.permission_classes = [IsAuthenticated & IsInstructor]
         return super().get_permissions()
 
-    def check_object_permissions(self, request, obj):
-        """
-        Checks if the user is the owner of the object.
-
-        Args:
-        - request: The request object.
-        - obj: The object to be checked.
-
-        Returns:
-        - None
-        """
-        super().check_object_permissions(request, obj)
-
-        token = request.auth.token.decode()
-        payload = JWTToken.get_payload(token)
-        if payload.get("user_role") == "student":
-            now = datetime.now()
-            if not (now >= obj.exam.start_time and now < obj.exam.end_time):
-                self.permission_denied(request, 'You cannot perform this action at this time.')
-
 class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     """
     A view for retrieving, updating, and deleting questions.
@@ -96,7 +82,22 @@ class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     - get_permissions: Returns the list of permissions required for each HTTP method.
     """
 
-    queryset = Question.objects.all()
+    def get_queryset(self):
+        """
+        This view should return a list of all the questions
+        for the currently authenticated user.
+        """
+        exam_id = self.request.query_params.get('exam_id', None)
+        exam_title = self.request.query_params.get('exam_title', None)
+        user_type = self.request.user.user_type
+
+        if user_type == 3:
+            exam = Exam.objects.get(id=exam_id, title=exam_title)
+            if not (exam.start_time <= timezone.now() <= exam.end_time):
+                self.permission_denied(self.request, 'You can\'t do that action at this time')
+
+        return Question.objects.all()
+
     serializer_class = QuestionSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = QuestionsFilter
@@ -115,23 +116,3 @@ class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         elif self.request.method == "DELETE":
             self.permission_classes = [IsAuthenticated & IsOwner]
         return super().get_permissions()
-
-    def check_object_permissions(self, request, obj):
-        """
-        Checks if the user is the owner of the object.
-
-        Args:
-        - request: The request object.
-        - obj: The object to be checked.
-
-        Returns:
-        - None
-        """
-        super().check_object_permissions(request, obj)
-
-        token = request.auth.token.decode()
-        payload = JWTToken.get_payload(token)
-        if payload.get("user_role") == "student":
-            now = datetime.now()
-            if obj.exam.start_time >= now or obj.exam.end_time < now:
-                self.permission_denied(request, 'You cannot perform this action at this time.')
