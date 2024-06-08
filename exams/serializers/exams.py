@@ -56,3 +56,16 @@ class ExamSerializer(serializers.ModelSerializer):
         representation["end_date"] = end_date_tz.isoformat()
 
         return representation
+
+    def create(self, validated_data):
+        # Convert start_date and end_date to Cairo timezone before saving
+        cairo_tz = pytz_timezone('Africa/Cairo')
+        if 'start_date' in validated_data:
+            start_date_utc = validated_data['start_date']
+            start_date_tz = start_date_utc.astimezone(cairo_tz)
+            validated_data['start_date'] = start_date_tz
+        if 'end_date' in validated_data:
+            end_date_utc = validated_data['end_date']
+            end_date_tz = end_date_utc.astimezone(cairo_tz)
+            validated_data['end_date'] = end_date_tz
+        return super().create(validated_data)
