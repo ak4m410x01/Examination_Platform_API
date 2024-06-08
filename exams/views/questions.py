@@ -15,10 +15,8 @@ from accounts.permissions.isStudent import IsStudent
 from accounts.permissions.isInstructor import IsInstructor
 from exams.models.questions import Question
 from exams.models.exams import Exam
-from datetime import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from exams.filters.questions import QuestionsFilter
-from authentication.utils.token import JWTToken
 from datetime import datetime
 
 class QuestionListCreate(ListCreateAPIView):
@@ -45,7 +43,7 @@ class QuestionListCreate(ListCreateAPIView):
         if exam_id and exam_title:
             if user_type == 3:
                 exam = Exam.objects.get(id=exam_id, title=exam_title)
-                if not (exam.start_time <= timezone.now() <= exam.end_time):
+                if not (exam.start_date <= datetime.now() <= exam.end_date):
                     self.permission_denied(self.request, 'You can\'t do that action at this time')
             return Question.objects.filter(exam__id=exam_id, exam__title=exam_title)
         elif user_type == 3:
@@ -93,7 +91,7 @@ class QuestionRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
 
         if user_type == 3:
             exam = Exam.objects.get(id=exam_id, title=exam_title)
-            if not (exam.start_time <= timezone.now() <= exam.end_time):
+            if not (exam.start_date <= datetime.now() <= exam.end_date):
                 self.permission_denied(self.request, 'You can\'t do that action at this time')
 
         return Question.objects.all()
