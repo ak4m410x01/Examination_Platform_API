@@ -32,7 +32,7 @@ services:
       - "80:80"
     depends_on:
       - postgres
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn project.wsgi --bind 0.0.0.0:80"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn project.wsgi --bind 0.0.0.0:80 --reload"
 
 volumes:
   static_data: {}
