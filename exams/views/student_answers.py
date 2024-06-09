@@ -32,7 +32,7 @@ class StudentAnswersListCreate(ListCreateAPIView):
         if self.request.method == "GET":
             self.permission_classes = [IsAuthenticated & (IsAdmin | IsInstructor | IsStudent)]
         elif self.request.method == "POST":
-            self.permission_classes = [IsAuthenticated & IsStudent]
+            self.permission_classes = [IsAuthenticated & (IsAdmin | IsStudent)]
         return super().get_permissions()
 
 
