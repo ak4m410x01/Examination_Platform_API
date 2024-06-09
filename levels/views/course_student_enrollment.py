@@ -8,7 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from levels.serializers.course_student_enrollment import CourseStudentEnrollmentSerializer
 from levels.filters.course_student_enrollment import CourseStudentEnrollmentFilter
 from accounts.permissions.isAdmin import IsAdmin
-from accounts.permissions.isOwner import IsOwner
+# from accounts.permissions.isInstructor import IsInstructor
+# from accounts.permissions.isStudent import IsStudent
 from levels.models.course_student_enrollment import CourseStudentEnrollment
 
 
@@ -55,7 +56,7 @@ class CourseStudentEnrollmentRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView)
         For PUT and DELETE requests, the user must be authenticated and an admin.
         """
         if self.request.method == "GET":
-            self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner)]
+            self.permission_classes = [IsAuthenticated & IsAdmin]
         elif self.request.method == "PUT":
             self.permission_classes = [IsAuthenticated & IsAdmin]
         elif self.request.method == "DELETE":

@@ -40,7 +40,7 @@ class ExamFilter(django_filters.FilterSet):
 		Returns:
 			QuerySet: The filtered queryset.
 		"""
-		return queryset.filter(students__name__icontains=value)
+		return queryset.filter(students__username__exact=value)
 
 	def filter_by_level(self, queryset, name, value):
 		"""

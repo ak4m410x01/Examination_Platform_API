@@ -60,7 +60,7 @@ class DepartmentRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
         - A list of permission classes.
         """
         if self.request.method == "GET":
-            self.permission_classes = [IsAuthenticated & (IsAdmin | IsOwner)]
+            self.permission_classes = [IsAuthenticated & IsAdmin]
         elif self.request.method == "PUT":
             self.permission_classes = [IsAuthenticated & IsAdmin]
         elif self.request.method == "DELETE":
